@@ -14,6 +14,8 @@ env:
 matrix:
   fast_finish: true
   include:
+    - php: 7.1
+      env: DEPENDENCIES=beta
     - php: 7.0
       env: TARGET=cs_dry_run
     - php: 5.5
@@ -32,6 +34,7 @@ cache:
     - $HOME/.composer/cache
 
 before_install:
+  - if [ "$DEPENDENCIES" = "beta" ]; then perl -pi -e 's/^}$/,"minimum-stability":"beta"}/' composer.json; fi;
   - if [ "$SYMFONY_VERSION" != "" ]; then composer require "symfony/symfony:${SYMFONY_VERSION}" --no-update; fi;
   - if [ "$TRAVIS_PHP_VERSION" != "hhvm" ]; then echo "memory_limit=2G" >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi;
 
