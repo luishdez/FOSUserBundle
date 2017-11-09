@@ -29,7 +29,7 @@ class FlashListenerTest extends \PHPUnit_Framework_TestCase
 
         $flashBag = $this->getMockBuilder('Symfony\Component\HttpFoundation\Session\Flash\FlashBag')->getMock();
 
-        $session = $this->getMockBuilder('Symfony\Component\HttpFoundation\Session\Session')->getMock();
+        $session = $this->getMockBuilder('Symfony\Component\HttpFoundation\Session\Session')->disableOriginalConstructor()->getMock();
         $session
             ->expects($this->once())
             ->method('getFlashBag')
